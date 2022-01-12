@@ -1,0 +1,5 @@
+---
+server_address: 10.1.1.66:8181
+machine_id: demo-m1
+insecure: true
+dest_dir: files/next

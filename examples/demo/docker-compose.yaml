@@ -20,7 +20,8 @@ services:
     image: ${OTELCOL_IMG}
     command: ["--config=/etc/otel-collector-config.yaml", "${OTELCOL_ARGS}"]
     volumes:
-      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+      - ./config-updater/files/current/etc/otel-collector-config.yaml:/etc/otel-collector-config.yaml
+
     ports:
       - "1888:1888"   # pprof extension
       - "8888:8888"   # Prometheus metrics exposed by the collector
@@ -31,6 +32,9 @@ services:
     depends_on:
       - jaeger-all-in-one
       - zipkin-all-in-one
+    user: "1000"
+    environment:
+      - HOSTNAME
 
   demo-client:
     build:
